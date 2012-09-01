@@ -1,5 +1,10 @@
+/**
+ * Author: Linus Metzler
+ * Author URL: http://linusmetzler.me
+ * License: [TBD]
+ */
 (function( $ ){
-	$.fn.filterMultipleData = function(termSelector = 'button', items = '.filter-items > li', filterAttribute = 'term-id') {
+	$.fn.filterMultipleData = function(mutltipleSelections, termSelector, items, filterAttribute) {
 		var $terms = this;
 		var $termsSelectors = this.find(termSelector);
 		var $items = $(items);
@@ -20,8 +25,13 @@
 			if($clickedTerm.data('filter-active') == 'yes'){
 				$clickedTerm.data('filter-active', 'no');
 			}else{
+				if(mutltipleSelections === false){
+					$termsSelectors.each(function(){
+						$(this).data('filter-active', 'no')
+					});
+				}
 				$clickedTerm.data('filter-active', 'yes');
-			}	
+			}
 			$termsSelectors.each(function(){
 				var $cSelector = $(this);
 				if($cSelector.data('filter-active') == 'no'){
